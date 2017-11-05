@@ -1,0 +1,58 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-styles/shadow.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+
+<dom-module id="todo-list-element">
+	<template>
+		<style>
+			div{
+				background-color: var(--todo-list-element-background-color);
+				width: var(--todo-list-element-width,350px);
+			}
+			h4{
+				display: inline-block;
+			}
+			.container{
+				@apply --shadow-elevation-2dp;
+			}
+		</style>
+		<div class="container">
+			<h1>[[name]]</h1>
+			<template is="dom-repeat" items="[[todoList]]" as="task">
+				<div>
+					<input type="checkbox" checked$="[[task.complete]]">
+					<h4>[[task.name]]</h4>
+				</div>
+			</template>
+			<template is="dom-if" if="[[!todoList.length]]">
+				The list is empty
+			</template>
+		</div>	
+	</template>
+	<script>
+		class TodoListElement extends Polymer.Element{
+			static get is() { return 'todo-list-element'; }
+			static get properties() {
+        return {
+        	name:{
+        		type:String,
+        		value:"homeworks"
+        	},
+        	todoList:Array,
+        	important:{
+        		type:Boolean,
+        		value:false,
+        		observer:"_importantChanged"
+        	}
+        };
+      }
+      _importantChanged(important){
+      	if (important)
+      	this.updateStyles({
+          '--todo-list-element-background-color': 'var(--paper-red-500)',
+        });
+      }
+		}
+		window.customElements.define(TodoListElement.is, TodoListElement);
+	</script>
+</dom-module>

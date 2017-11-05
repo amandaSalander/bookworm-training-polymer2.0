@@ -1,0 +1,52 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
+
+<link rel="import" href="todo-list-element.html">
+
+<dom-module id="polymer-codelab-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+        --todo-list-element-background-color:var(--paper-blue-500);
+        --todo-list-element-width:300px;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+    <todo-list-element name="[[todoListCard.name]]" todo-list="[[todoListCard.todoList]]"></todo-list-element>
+    <todo-list-element name="Chores" todo-list="[]" important></todo-list-element>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class PolymerCodelabApp extends Polymer.Element {
+      static get is() { return 'polymer-codelab-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'polymer-codelab-app'
+          },
+          todoListCard:{
+            type:Object,
+            value:function() {
+              return {
+                name:"homeworks",
+                todoList:[
+                  {name:"algorithms",complete:false},
+                  {name:"algebra",complete:true},
+                  {name:"physics",complete:true}
+                ]
+              }
+            }
+          }
+        };
+      }
+    }
+
+    window.customElements.define(PolymerCodelabApp.is, PolymerCodelabApp);
+  </script>
+</dom-module>

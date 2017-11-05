@@ -1,0 +1,6 @@
+{
+  "name": "polymer-codelab",
+  "short_name": "polymer-codelab",
+  "start_url": "/",
+  "display": "standalone"
+}

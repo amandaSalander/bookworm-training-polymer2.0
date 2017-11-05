@@ -1,0 +1,36 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="todo-list-element">
+	<template>
+		<style>
+			h4{
+				display: inline-block;
+			}
+		</style>
+		<h1>[[name]]</h1>
+		<template is="dom-repeat" items="[[todoList]]" as="task">
+			<div>
+				<input type="checkbox" checked$="[[task.complete]]">
+				<h4>[[task.name]]</h4>
+			</div>
+		</template>
+		<template is="dom-if" if="[[!todoList.length]]">
+			The list is empty
+		</template>
+	</template>
+	<script>
+		class TodoListElement extends Polymer.Element{
+			static get is() { return 'todo-list-element'; }
+			static get properties() {
+        return {
+        	name:{
+        		type:String,
+        		value:"homeworks"
+        	},
+        	todoList:Array
+        };
+      }
+		}
+		window.customElements.define(TodoListElement.is, TodoListElement);
+	</script>
+</dom-module>

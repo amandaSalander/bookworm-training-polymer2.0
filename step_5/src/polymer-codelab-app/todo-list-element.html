@@ -1,0 +1,66 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-styles/shadow.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+<dom-module id="todo-list-element">
+	<template>
+		<style>
+			paper-card{
+				background-color: var(--todo-list-element-background-color);
+				width: var(--todo-list-element-width,350px);
+				--paper-card-header-color:#FFF;
+			}
+			h4{
+				display: inline-block;
+			}
+			paper-checkbox{
+				--paper-checkbox-checked-color: var(--paper-blue-700);
+				--paper-checkbox-unchecked-color: var(--paper-blue-900);
+				--paper-checkbox-label-color:#FFF;
+			}
+			paper-item{
+				color: #FFF;
+			}
+		</style>
+		<paper-card heading="[[name]]" elevation="1">
+		  <div class="card-content">
+		  	<template is="dom-repeat" items="[[todoList]]" as="task">
+					<paper-item>
+						<paper-checkbox checked$="[[task.complete]]">[[task.name]]</paper-checkbox>
+					</paper-item>
+				</template>
+				<template is="dom-if" if="[[!todoList.length]]">
+					<paper-item>The list is empty</paper-item>
+				</template>
+		  </div>
+		</paper-card>
+	</template>
+	<script>
+		class TodoListElement extends Polymer.Element{
+			static get is() { return 'todo-list-element'; }
+			static get properties() {
+        return {
+        	name:{
+        		type:String,
+        		value:"homeworks"
+        	},
+        	todoList:Array,
+        	important:{
+        		type:Boolean,
+        		value:false,
+        		observer:"_importantChanged"
+        	}
+        };
+      }
+      _importantChanged(important){
+      	if (important)
+      	this.updateStyles({
+          '--todo-list-element-background-color': 'var(--paper-red-500)',
+        });
+      }
+		}
+		window.customElements.define(TodoListElement.is, TodoListElement);
+	</script>
+</dom-module>

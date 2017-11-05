@@ -1,0 +1,35 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="todo-list-element.html">
+
+<dom-module id="polymer-codelab-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+    <todo-list-element></todo-list-element>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class PolymerCodelabApp extends Polymer.Element {
+      static get is() { return 'polymer-codelab-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'polymer-codelab-app'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(PolymerCodelabApp.is, PolymerCodelabApp);
+  </script>
+</dom-module>
